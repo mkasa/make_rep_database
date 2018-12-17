@@ -1,6 +1,6 @@
 # make_rep_database
 
-program of detecting and clustering repeat sequences from reads.
+Program for detecting and clustering repeat sequences from whole-genome shotgun reads.
 
 ## Description
 
@@ -43,25 +43,27 @@ realignerとdump-consensusの設定は、ラボ内DocBase参照。
 
 ## Usage
 
-`make_rep_database.sh -in input.fa -d output_directory -re realigner_directory -du dump-consensus_directory -top the_number_of_top_reads_to_use -it the_maximum_number_of_iterations_of_realigner -cov threshold_of_depth -int threshold_of_peak_interval -pe threshold_of_peak_coverage -cut threshold_of_cut_interval`
+```sh
+make_rep_database.sh -in input.fa -d output_directory -re realigner_directory -du dump-consensus_directory -top the_number_of_top_reads_to_use -it the_maximum_number_of_iterations_of_realigner -cov threshold_of_depth -int threshold_of_peak_interval -pe threshold_of_peak_coverage -cut threshold_of_cut_interval
+```
 
 今の仕様だと、
 
-- `-in` 入力のFASTAファイル
+- `-in` 入力のFASTAファイル(Long Read WGSのリードファイル, 量の指定は特になく, 0.1x などでも良い。)
 
 - `-d` 出力ファイルを出すディレクトリを指定(絶対パス)
 
-- `-re` realignerのディレクトリ
+- `-re` realignerのディレクトリ(絶対パスでしかテストしていない)
 
-- `-du` dump-consensusのディレクトリ
+- `-du` dump-consensusのディレクトリ(絶対パスでしかテストしていない)
 
 - `-top` 長い順に上から何本をrepeat検出のreferenceとして使うか
 
-- `-it` realignerを最大何回回すか
+- `-it` realignerを最大何回回すか(収束しない場合の打ち切り回数)
 
-- `-cov` カバレッジいくつ以上の領域をリピートとみなすか
+- `-cov` カバレッジいくつ以上の領域をリピートとみなすか(小数点以下可能)
 
-- `-int` 何bp内のリードの終端のカバレッジを極大値とみなすか
+- `-int` 何bp内のリードの終端のカバレッジを極大値とみなすか(a.k.a. リピートユニットの最小長さ)
 
 - `-pe` リードの終端の数がいくつ以上のとき、ピークとみなすか
 
